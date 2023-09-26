@@ -70,7 +70,7 @@ const Auth = () => {
             });
             setfulldata(jsonResult);
             let decoded = jsonResult['data'] ? jwt_decode(jsonResult['data']) : null;
-            let state= jsonResult['state'] ? jwt_decode(jsonResult['state']) : null;
+            let state = jsonResult['state'] ? jwt_decode(jsonResult['state']) : null;
             setstate(state)
             setdecodedToken(decoded)
         }
@@ -82,7 +82,7 @@ const Auth = () => {
 
 
     const handleOpenWindow = () => {
-        window.open("https://accounts.shopify.com/",  "_self", "width=800,height=600")
+        window.open("https://accounts.shopify.com/", "_self", "width=800,height=600")
     }
 
 
@@ -97,7 +97,7 @@ const Auth = () => {
                 // Authorization: `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`
             },
             body: JSON.stringify({
-                "remote_shop_id": decodedToken?.data?.shop_id ,
+                "remote_shop_id": decodedToken?.data?.shop_id,
             })
         }).then(res => res.json()).then(data => {
             setloading(false)
@@ -112,17 +112,17 @@ const Auth = () => {
         ).catch(err => console.error(err))
     }
 
-    const handleRadioChange=(value:any)=>{
+    const handleRadioChange = (value: any) => {
         setselectedUrl(value?.username)
     }
 
-    const handleConnectAction=()=>{
-        if(selectedUrl.length>0){
-             // Regular expression pattern to match Shopify shop URLs
-  const regex:any = /^(https?:\/\/)?([a-zA-Z0-9-]+)\.myshopify\.com$/i;
+    const handleConnectAction = () => {
+        if (selectedUrl.length > 0) {
+            // Regular expression pattern to match Shopify shop URLs
+            const regex: any = /^(https?:\/\/)?([a-zA-Z0-9-]+)\.myshopify\.com$/i;
             // console.log(process.env.REACT_APP_BASE_URL+`connector/request/shopifyCurrentRoute?current_route=dashboard&sAppId=1&shop=${selectedUrl}`)
-            window.open(`https://admin.shopify.com/store/${regex.exec(selectedUrl)[2]}/apps/amazon-by-cedcommerce-dev-1` ,"_self")
-        }else{
+            window.open(`https://admin.shopify.com/store/${regex.exec(selectedUrl)[2]}/apps/amazon-by-cedcommerce-dev-1`, "_self")
+        } else {
             toggleModal2(!open2)
         }
     }
@@ -131,151 +131,151 @@ const Auth = () => {
 
     return (
         <>
-            {loading ? <Loader />:
-            <div className="init-Login__Wrapper">
-                <div className="init-LoginPage">
-                    <div className="inte-auth-custom">
-                        <FlexLayout direction="vertical" spacing="extraLoose">
-                            <FlexLayout valign="start" spacing="loose" wrap="noWrap">
-                                <CedcommerceLogo />
-                                <FlexLayout direction="vertical">
-                                    <TextStyles
-                                        alignment="left"
-                                        fontweight="extraBold"
-                                        headingTypes="LG-2.8"
-                                        lineHeight="LH-4.0"
-                                        textcolor="dark"
-                                        type="Heading"
-                                    >
-                                        Welcome to CedCommerce Amazon Integrations
-                                    </TextStyles>
-                                    <TextStyles
-                                        type="SubHeading"
-                                        alignment="left"
-                                        lineHeight="LH-4.0"
-                                        utility="inte__Heading-font--xxl app-subtitle"
-                                        textcolor='light'
-                                    >
-                                        By CedCommerce
-                                    </TextStyles>
+            {loading ? <Loader /> :
+                <div className="init-Login__Wrapper">
+                    <div className="init-LoginPage">
+                        <div className="inte-auth-custom">
+                            <FlexLayout direction="vertical" spacing="extraLoose">
+                                <FlexLayout valign="start" spacing="loose" wrap="noWrap">
+                                    <CedcommerceLogo />
+                                    <FlexLayout direction="vertical">
+                                        <TextStyles
+                                            alignment="left"
+                                            fontweight="extraBold"
+                                            headingTypes="LG-2.8"
+                                            lineHeight="LH-4.0"
+                                            textcolor="dark"
+                                            type="Heading"
+                                        >
+                                            Welcome to CedCommerce Amazon Integrations
+                                        </TextStyles>
+                                        <TextStyles
+                                            type="SubHeading"
+                                            alignment="left"
+                                            lineHeight="LH-4.0"
+                                            utility="inte__Heading-font--xxl app-subtitle"
+                                            textcolor='light'
+                                        >
+                                            By CedCommerce
+                                        </TextStyles>
+                                    </FlexLayout>
                                 </FlexLayout>
-                            </FlexLayout>
 
-                            <FlexLayout direction="vertical" spacing="tight">
-                                <Card
-                                    cardType="Shadowed"
-                                    onError={function noRefCheck() { }}
-                                    onLoad={function noRefCheck() { }}
-                                    primaryAction={{
-                                        content: 'Connect',
-                                        type: 'Primary',
-                                        icon: <ArrowRight size={16} />,
-                                        disable: Object.keys(shopName).length>0 && urlselected? false:selected.length > 0  ?false:true ,
-                                        iconAlign: "right",
-                                        onClick: handleConnectAction,
-                                    }}
-                                    subTitle="Select and connect channel to integrate with your Zoho acccount. Connect atleast one channel to finish onboarding."
-                                    title="Multiple Amazon Account Connect"
-                                >
-                                    <FlexLayout spacing="loose">
-                                        <FlexChild desktopWidth='33' tabWidth='33' mobileWidth='100'>
-                                            <span onClick={() => selectMarketplace("shopify")}>
-                                                <Card cardType='Bordered' extraClass={selected === "shopify" ? "Custom__Card--Logo-Border" : "Custom__Card--Logo"}>
-                                                    <ShopifyLogo />
-                                                </Card>
-                                            </span>
-                                        </FlexChild>
-                                        <FlexChild desktopWidth='33' tabWidth='33' mobileWidth='100'>
-                                            {/* <span onClick={() => { console.log("clicked woocommerce"); }}> */}
+                                <FlexLayout direction="vertical" spacing="tight">
+                                    <Card
+                                        cardType="Shadowed"
+                                        onError={function noRefCheck() { }}
+                                        onLoad={function noRefCheck() { }}
+                                        primaryAction={{
+                                            content: 'Connect',
+                                            type: 'Primary',
+                                            icon: <ArrowRight size={16} />,
+                                            disable: Object.keys(shopName).length > 0 && urlselected ? false : selected.length > 0 ? false : true,
+                                            iconAlign: "right",
+                                            onClick: handleConnectAction,
+                                        }}
+                                        subTitle="Select and connect channel to integrate with your Zoho acccount. Connect atleast one channel to finish onboarding."
+                                        title="Multiple Amazon Account Connect"
+                                    >
+                                        <FlexLayout spacing="loose">
+                                            <FlexChild desktopWidth='33' tabWidth='33' mobileWidth='100'>
+                                                <span onClick={() => selectMarketplace("shopify")}>
+                                                    <Card cardType='Bordered' extraClass={selected === "shopify" ? "Custom__Card--Logo-Border" : "Custom__Card--Logo"}>
+                                                        <ShopifyLogo />
+                                                    </Card>
+                                                </span>
+                                            </FlexChild>
+                                            <FlexChild desktopWidth='33' tabWidth='33' mobileWidth='100'>
+                                                {/* <span onClick={() => { console.log("clicked woocommerce"); }}> */}
                                                 <Card cardType='Bordered' extraClass={"disable"}>
                                                     <WooCommerceLogo />
                                                 </Card>
-                                            {/* </span> */}
-                                        </FlexChild>
-                                        <FlexChild desktopWidth='33' tabWidth='33' mobileWidth='100'>
-                                            {/* <span onClick={() => { console.log("clicked shopline"); setselected("shopline") }}> */}
-                                            <Card cardType='Bordered' extraClass={"disable"}>
-                                                <ShoplineLogo />
-                                            </Card>
-                                            {/* </span> */}
-                                        </FlexChild>
-                                    </FlexLayout>
-                                    {Object.keys(shopName).length>0&& <div style={{marginTop:"20px"}}><FlexLayout direction="vertical" spacing="mediumTight">
-                                        <TextStyles fontweight="bold" >select the store you want to connect</TextStyles>
-                                        {Object.values(shopName).map((value:any,count:number)=>{
-                                            return (
-                                                <Radio
-                                                description={'select this shop'}
-                                                id={value?.username}
-                                                key={count}
-                                                value={value?.username}
-                                                labelVal={value?.username}
-                                                name={"shops"}
-                                                onClick={()=>handleRadioChange(value)}
-                                            />
+                                                {/* </span> */}
+                                            </FlexChild>
+                                            <FlexChild desktopWidth='33' tabWidth='33' mobileWidth='100'>
+                                                {/* <span onClick={() => { console.log("clicked shopline"); setselected("shopline") }}> */}
+                                                <Card cardType='Bordered' extraClass={"disable"}>
+                                                    <ShoplineLogo />
+                                                </Card>
+                                                {/* </span> */}
+                                            </FlexChild>
+                                        </FlexLayout>
+                                        {Object.keys(shopName).length > 0 && <div style={{ marginTop: "20px" }}><FlexLayout direction="vertical" spacing="mediumTight">
+                                            <TextStyles fontweight="bold" >select the store you want to connect</TextStyles>
+                                            {Object.values(shopName).map((value: any, count: number) => {
+                                                return (
+                                                    <Radio
+                                                        description={'select this shop'}
+                                                        id={value?.username}
+                                                        key={count}
+                                                        value={value?.username}
+                                                        labelVal={value?.username}
+                                                        name={"shops"}
+                                                        onClick={() => handleRadioChange(value)}
+                                                    />
 
-                                            )
-                                        }
+                                                )
+                                            }
 
-                                        )}
+                                            )}
 
 
-                                    </FlexLayout></div>}
+                                        </FlexLayout></div>}
 
-                                </Card>
-                            </FlexLayout>
-                        </FlexLayout>
-                        <Modal
-                            modalSize="medium"
-                            open={!open2}
-                            heading={"Shopify account connect"}
-                            primaryAction={primaryAction2}
-                            secondaryAction={secondaryAction2}
-                            close={() => {
-                                toggleModal2(!open2);
-                            }}
-                        >
-                            <FlexLayout direction='vertical' spacing='loose'>
-                                <TextStyles
-                                    fontweight="bold"
-                                    paragraphTypes="MD-1.4"
-                                    type="Paragraph"
-                                >
-                                    Connection Credentials
-                                </TextStyles>
-                                <TextField
-                                    name="Store URL"
-                                    placeHolder="Enter shopify store URL"
-                                    required
-                                    value={storeUrl}
-                                    onChange={(value: string) => setstoreUrl(value)}
-                                    tabIndex={1}
-                                    thickness="thick"
-                                    type="text"
-                                />
-                                {ErrorMessage || <TextStyles textcolor='negative' >{ErrorMessage}</TextStyles>}
-                                <FlexLayout spacing='extraTight'>
-                                    <TextStyles
-                                        fontweight="normal"
-                                        paragraphTypes="MD-1.4"
-                                        textcolor="light"
-                                        type="Paragraph"
-                                    >
-                                        New to Shopify?
-                                    </TextStyles>
-                                    <Button
-                                        content="Create an account"
-                                        onAction={function noRefCheck() { }}
-                                        onClick={() => handleOpenWindow()}
-                                        thickness="thin"
-                                        type="TextButton"
-                                    />
+                                    </Card>
                                 </FlexLayout>
                             </FlexLayout>
-                        </Modal>
+                            <Modal
+                                modalSize="medium"
+                                open={!open2}
+                                heading={"Shopify account connect"}
+                                primaryAction={primaryAction2}
+                                secondaryAction={secondaryAction2}
+                                close={() => {
+                                    toggleModal2(!open2);
+                                }}
+                            >
+                                <FlexLayout direction='vertical' spacing='loose'>
+                                    <TextStyles
+                                        fontweight="bold"
+                                        paragraphTypes="MD-1.4"
+                                        type="Paragraph"
+                                    >
+                                        Connection Credentials
+                                    </TextStyles>
+                                    <TextField
+                                        name="Store URL"
+                                        placeHolder="Enter shopify store URL"
+                                        required
+                                        value={storeUrl}
+                                        onChange={(value: string) => setstoreUrl(value)}
+                                        tabIndex={1}
+                                        thickness="thick"
+                                        type="text"
+                                    />
+                                    {ErrorMessage || <TextStyles textcolor='negative' >{ErrorMessage}</TextStyles>}
+                                    <FlexLayout spacing='extraTight'>
+                                        <TextStyles
+                                            fontweight="normal"
+                                            paragraphTypes="MD-1.4"
+                                            textcolor="light"
+                                            type="Paragraph"
+                                        >
+                                            New to Shopify?
+                                        </TextStyles>
+                                        <Button
+                                            content="Create an account"
+                                            onAction={function noRefCheck() { }}
+                                            onClick={() => handleOpenWindow()}
+                                            thickness="thin"
+                                            type="TextButton"
+                                        />
+                                    </FlexLayout>
+                                </FlexLayout>
+                            </Modal>
+                        </div>
                     </div>
-                </div>
-            </div >}
+                </div >}
         </>
     );
 }
